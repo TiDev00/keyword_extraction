@@ -1,10 +1,10 @@
-# Keywords Extraction Tool
+# DITA Keywords Extraction Tool
 
 ## Description
 Useful tool to extract keyword for multiple dita files. 
 It is based on Unsupervised Approach for Automatic 
 Keyword Extraction using Text Features. Yake and kwx are 
-used combined with bert embedding model.
+used for the extracting model.
 
 ## Installation
 All the needed packages are already installed in the 
