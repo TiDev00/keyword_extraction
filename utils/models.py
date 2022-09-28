@@ -41,9 +41,6 @@ def yake_extractor(text, ngram, topn):
     return kw_extractor.extract_keywords(text)
 
 
-input_language = "english"
-
-
 def bert_extractor(text, top_keywords, ntopics):
     """
         Load a corpus and extract the specified number of keywords
@@ -60,6 +57,7 @@ def bert_extractor(text, top_keywords, ntopics):
             keywords_list : list
                 List of extracted keywords
     """
+    input_language = "english"
     if top_keywords is None:
         top_keywords = 10
     if ntopics is None:
