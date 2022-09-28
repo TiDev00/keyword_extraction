@@ -32,7 +32,7 @@ def yake_extractor(text, ngram, topn):
         -------
             keywords_list : list
                 List of extracted keywords
-        """
+    """
     if ngram is None:
         ngram = 1
     if topn is None:
@@ -46,20 +46,20 @@ input_language = "english"
 
 def bert_extractor(text, top_keywords, ntopics):
     """
-            Load a corpus and extract the specified number of keywords
-            Parameters
-            ----------
-                text : str
-                    Data extracted and merged from dita files
-                top_keywords : int
-                    Length of a single keywords (default=1)
-                ntopics : int
-                    The number of categories for BERT (default=10)
-            Returns
-            -------
-                keywords_list : list
-                    List of extracted keywords
-            """
+        Load a corpus and extract the specified number of keywords
+        Parameters
+        ----------
+            text : str
+                Data extracted and merged from dita files
+            top_keywords : int
+                Length of a single keywords (default=1)
+            ntopics : int
+                The number of categories for BERT (default=10)
+        Returns
+        -------
+            keywords_list : list
+                List of extracted keywords
+    """
     if top_keywords is None:
         top_keywords = 10
     if ntopics is None:
