@@ -6,6 +6,7 @@ Created on Tue Sep 27 18:27:03 2022
 """
 import os
 from pathlib import Path
+import utils
 
 if __name__ == "__main__":
     # get the terminal width
@@ -37,6 +38,16 @@ while directory_missing:
     else:
         print("\nInvalid path\n")
 
+# Number of keywords wanted
+num_keyword_missing = True
+while num_keyword_missing:
+    try:
+        num_keywords = int(input("\nHow many keywords do you want to extract ? "))
+    except ValueError:
+        print("\nInvalid number of keywords")
+    else:
+        num_keyword_missing = False
+
 # Choose a model between yake and bert
 model_missing = True
 while model_missing:
@@ -45,5 +56,16 @@ while model_missing:
     if model and model in ['y', 'b']:
         model_missing = False
     else:
-        print("\nInvalid choice")
+        print("\nInvalid model choice")
+
+if model == 'y':
+    ngram_missing = True
+    while ngram_missing:
+        try:
+            keywords_length = int(input("\nWhat is the length of extracted keywords ? "))
+        except ValueError:
+            print("\nInvalid keyword length")
+        else:
+            ngram_missing = False
+
 
