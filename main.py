@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 from utils import dita_processing, models
 
+
 if __name__ == "__main__":
     # get the terminal width
     width = os.get_terminal_size().columns
@@ -31,12 +32,12 @@ while directory_missing:
     directory_response = input("Enter a path to a directory with dita files : ")
     if directory_response:
         directory = Path(os.path.expanduser(directory_response))
-        if os.path.exists(directory):
+        if directory.exists():
             directory_missing = False
         else:
-            print("\nInvalid path\n")
+            print("\nInvalid given path\n")
     else:
-        print("\nInvalid path\n")
+        print("\nInvalid given path\n")
 
 # Number of keywords wanted
 num_keywords_missing = True
@@ -69,7 +70,7 @@ if model == 'y':
     # Getting the number of ngram for yake
     ngram_missing = True
     while ngram_missing:
-        ngram_answers = input("\nWhat will be the length of the keywords ? ")
+        ngram_answers = input("\nWhat will be the max length of the keywords ? ")
         if ngram_answers and ngram_answers != '0':
             try:
                 num_ngram = int(ngram_answers)
@@ -85,9 +86,35 @@ if model == 'y':
     corpus_list = dita_processing.strip_dita_in_directory(directory)
     corpus = ' '.join(corpus_list)
     # Extracting keywords
-    print("\nYAKE EMBEDDING AND KEYWORD EXTRACTION...".center(width))
+    print("\n")
+    print("YAKE EMBEDDING AND KEYWORD EXTRACTION...".center(width))
     keywords = models.yake_extractor(corpus, num_keywords, num_ngram)
-
+    # Loop through the keywords list and display
+    for k in keywords:
+        print("\n{0}".format(k[0]))
+    # File generation verification
+    file_gen_ques = True
+    while file_gen_ques:
+        file_gen_response = input("\nDo you want to generate a file with these keywords ?\n\n"
+                                "YES (y) / NO (n) : ").lower()
+        if file_gen_response and file_gen_response in ['y', 'n']:
+            if file_gen_response == 'y':
+                gen_path_ques = True
+                while gen_path_ques:
+                    gen_path_response = input("\nEnter the path where the file should be saved : ")
+                    if gen_path_response:
+                        gen_path = Path(os.path.expanduser(gen_path_response))
+                        if gen_path.exists():
+                            gen_path_ques = False
+                            file_gen_ques = False
+                        else:
+                            print("\nInvalid given path")
+                    else:
+                        print("\nInvalid given path")
+            else:
+                file_gen_ques = False
+        else:
+            print("\nInvalid choice")
 
 
 

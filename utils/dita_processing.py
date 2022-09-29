@@ -4,6 +4,7 @@ DITA Files
 Function for extracting text in dita file.
 Contents:
     strip_dita_text
+    strip_dita_in_directory
 """
 import os
 from bs4 import BeautifulSoup
