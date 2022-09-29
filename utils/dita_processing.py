@@ -42,8 +42,7 @@ def strip_dita_in_directory(directory):
         for file in files:
             if os.path.join(root, file).endswith('.dita'):
                 with open(os.path.join(root, file), 'r', encoding='utf-8') as f:
-                    print("--------------------- " + file + " ---------------------")
-                    print("Extracting text in file...")
+                    print("\n-----> Extracting text in {0}".format(file))
                     text = strip_dita_text(f)
                     f.close()
                 list_of_docs.append(text)

@@ -6,7 +6,7 @@ Created on Tue Sep 27 18:27:03 2022
 """
 import os
 from pathlib import Path
-import utils
+from utils import dita_processing, models
 
 if __name__ == "__main__":
     # get the terminal width
@@ -39,14 +39,20 @@ while directory_missing:
         print("\nInvalid path\n")
 
 # Number of keywords wanted
-num_keyword_missing = True
-while num_keyword_missing:
-    try:
-        num_keywords = int(input("\nHow many keywords do you want to extract ? "))
-    except ValueError:
-        print("\nInvalid number of keywords")
+num_keywords_missing = True
+while num_keywords_missing:
+    num_answers = input("\nHow many keywords do you want to extract ? ")
+    if num_answers and num_answers != '0':
+        try:
+            num_keywords = int(num_answers)
+        except ValueError:
+            print("\nInvalid number of keywords")
+        else:
+            num_keywords_missing = False
     else:
-        num_keyword_missing = False
+        num_keywords = None
+        num_keywords_missing = False
+        print("\nThe default number of keywords (10) will be extracted")
 
 # Choose a model between yake and bert
 model_missing = True
@@ -58,14 +64,31 @@ while model_missing:
     else:
         print("\nInvalid model choice")
 
+# process in yake model
 if model == 'y':
+    # Getting the number of ngram for yake
     ngram_missing = True
     while ngram_missing:
-        try:
-            keywords_length = int(input("\nWhat is the length of extracted keywords ? "))
-        except ValueError:
-            print("\nInvalid keyword length")
+        ngram_answers = input("\nWhat will be the length of the keywords ? ")
+        if ngram_answers and ngram_answers != '0':
+            try:
+                num_ngram = int(ngram_answers)
+            except ValueError:
+                print("\nInvalid length for a keyword")
+            else:
+                ngram_missing = False
         else:
+            num_ngram = None
             ngram_missing = False
+            print("\nThe default length for a keyword (1-gram) will be applied")
+    # list of extracted text
+    corpus_list = dita_processing.strip_dita_in_directory(directory)
+    corpus = ' '.join(corpus_list)
+    # Extracting keywords
+    print("\nYAKE EMBEDDING AND KEYWORD EXTRACTION...".center(width))
+    keywords = models.yake_extractor(corpus, num_keywords, num_ngram)
+
+
+
 
 

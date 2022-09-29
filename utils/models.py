@@ -11,13 +11,13 @@ from kwx.model import extract_kws
 
 # Creating custom stoplist from stopwords.txt
 stop_list = []
-with open('stopwords.txt', 'r') as f:
+with open('utils/stopwords.txt', 'r') as f:
     for line in f:
         stop_list.append(line.strip())
     f.close()
 
 
-def yake_extractor(text, ngram, topn):
+def yake_extractor(text, topn, ngram):
     """
         Load a corpus and extract the specified number of keywords
         Parameters
