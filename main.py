@@ -8,7 +8,6 @@ import os
 from pathlib import Path
 from utils import dita_processing, models
 
-
 if __name__ == "__main__":
     # get the terminal width
     width = os.get_terminal_size().columns
@@ -92,11 +91,11 @@ if model == 'y':
     # Loop through the keywords list and display
     for k in keywords:
         print("\n{0}".format(k[0]))
-    # File generation verification
+    # File generation
     file_gen_ques = True
     while file_gen_ques:
         file_gen_response = input("\nDo you want to generate a file with these keywords ?\n\n"
-                                "YES (y) / NO (n) : ").lower()
+                                  "YES (y) / NO (n) : ").lower()
         if file_gen_response and file_gen_response in ['y', 'n']:
             if file_gen_response == 'y':
                 gen_path_ques = True
@@ -105,6 +104,11 @@ if model == 'y':
                     if gen_path_response:
                         gen_path = Path(os.path.expanduser(gen_path_response))
                         if gen_path.exists():
+                            with open(gen_path/"yake_keywords.txt", 'w') as file:
+                                for k in keywords:
+                                    file.write("{0}\n".format(k[0]))
+                            file.close()
+                            print("File was generated to : {0}".format(gen_path/"yake_keywords.txt"))
                             gen_path_ques = False
                             file_gen_ques = False
                         else:
@@ -116,6 +120,5 @@ if model == 'y':
         else:
             print("\nInvalid choice")
 
-
-
+# process in bert model
 
