@@ -25,11 +25,25 @@ if __name__ == "__main__":
 
 # Wrap given path in Path object and verify if it exists on mac or windows.
 # Expanduser will allow to interpret ~ in path as home dir
-isNotDirectory = True
-while isNotDirectory:
-    directory = Path(os.path.expanduser(input("Enter path to a directory containing dita files : ")))
-    if os.path.exists(directory):
-        isNotDirectory = False
+directory_missing = True
+while directory_missing:
+    directory_response = input("Enter a path to a directory with dita files : ")
+    if directory_response:
+        directory = Path(os.path.expanduser(directory_response))
+        if os.path.exists(directory):
+            directory_missing = False
+        else:
+            print("\nInvalid path\n")
     else:
         print("\nInvalid path\n")
+
+# Choose a model between yake and bert
+model_missing = True
+while model_missing:
+    model = (input("\nChoose between YAKE Model and BERT Model\n\n"
+                   "YAKE (y) / BERT (b) : ")).lower()
+    if model and model in ['y', 'b']:
+        model_missing = False
+    else:
+        print("\nInvalid choice")
 
