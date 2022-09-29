@@ -107,7 +107,7 @@ while restart:
                         if gen_path_response:
                             gen_path = Path(os.path.expanduser(gen_path_response))
                             if gen_path.exists():
-                                with open(gen_path/"yake_keywords.txt", 'w') as file:
+                                with open(gen_path/"yake_keywords.txt", 'w', encoding="utf-8") as file:
                                     for k in keywords:
                                         file.write("{0}\n".format(k[0]))
                                 file.close()
