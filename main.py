@@ -5,9 +5,11 @@ Created on Tue Sep 27 18:27:03 2022
 @author: Thierno Ibrahima CISSE
 """
 import os
-import subprocess
+import glob
+import pandas as pd
 from pathlib import Path
 from utils import dita_processing, models
+from kwx.utils import prepare_data
 
 if __name__ == "__main__":
     # get the terminal width
@@ -34,27 +36,28 @@ while restart:
         directory_response = input("\nEnter a path to a directory with dita files : ")
         if directory_response:
             directory = Path(os.path.expanduser(directory_response))
-            if directory.exists():
+            if directory.exists(): # Must verify if folder is empty
                 directory_missing = False
+                # print(directory.iterdir())
             else:
                 print("\nInvalid given path")
         else:
-            print("\nInvalid given path")
+            print("\nYou didn't gave a path")
 
     # Number of keywords wanted
-    num_keywords_missing = True
-    while num_keywords_missing:
-        num_answers = input("\nHow many keywords do you want to extract ? ")
-        if num_answers and num_answers != '0':
+    keywords_missing = True
+    while keywords_missing:
+        keywords_response = input("\nHow many keywords do you want to extract ? ")
+        if keywords_response and keywords_response != '0':
             try:
-                num_keywords = int(num_answers)
+                num_keywords = int(keywords_response)
             except ValueError:
                 print("\nInvalid number of keywords")
             else:
-                num_keywords_missing = False
+                keywords_missing = False
         else:
             num_keywords = None
-            num_keywords_missing = False
+            keywords_missing = False
             print("\nThe default number of keywords (10) will be extracted")
 
     # Choose a model between yake and bert
@@ -72,10 +75,10 @@ while restart:
         # Getting the number of ngram for yake
         ngram_missing = True
         while ngram_missing:
-            ngram_answers = input("\nWhat will be the max length of the keywords ? ")
-            if ngram_answers and ngram_answers != '0':
+            ngram_response = input("\nWhat will be the max length of the keywords ? ")
+            if ngram_response and ngram_response != '0':
                 try:
-                    num_ngram = int(ngram_answers)
+                    num_ngram = int(ngram_response)
                 except ValueError:
                     print("\nInvalid length for a keyword")
                 else:
@@ -125,6 +128,41 @@ while restart:
 
     # process in bert model
     if model == 'b':
+        # Getting number of topics for bert
+        topic_missing = True
+        while topic_missing:
+            topic_response = input("\nHow many topics do the dita files contain ? ")
+            if topic_response and topic_response != '0':
+                try:
+                    num_topics = int(topic_response)
+                except ValueError:
+                    print("\nInvalid number of topics")
+                else:
+                    topic_missing = False
+            else:
+                num_topics = None
+                topic_missing = False
+                print("\nThe default number of topics (5) will be applied")
+        # list of extracted text
+        corpus_list = dita_processing.strip_dita_in_directory(directory)
+        # Text Preprocessing
+        print("\nPreparing data...")
+        text_corpus = prepare_data(
+            data=pd.DataFrame(corpus_list, columns=["docs"]),
+            target_cols="docs",
+            input_language="english",
+            min_token_freq=2,
+            min_token_len=4,
+            remove_stopwords=True,
+            verbose=False,
+        )
+        corpus_no_ngrams = [
+            " ".join([t for t in text.split(" ") if "_" not in t]) for text in text_corpus
+        ]
+        # Extracting keywords
+        print("\n")
+        print("LIST OF KEYWORDS".center(width))
+        keywords = models.bert_extractor(corpus_no_ngrams, num_keywords, num_topics)
         pass
 
     # Extract again keywords or close program

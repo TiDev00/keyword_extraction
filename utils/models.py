@@ -61,7 +61,7 @@ def bert_extractor(text, top_keywords, ntopics):
     if top_keywords is None:
         top_keywords = 10
     if ntopics is None:
-        ntopics = 10
+        ntopics = 5
     return extract_kws(
         method="BERT",
         text_corpus=text,
@@ -69,6 +69,6 @@ def bert_extractor(text, top_keywords, ntopics):
         num_keywords=top_keywords,
         num_topics=ntopics,
         prompt_remove_words=False,
-        show_progress_bar=True,
+        show_progress_bar=False,
         batch_size=32,
     )
