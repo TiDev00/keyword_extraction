@@ -36,7 +36,7 @@ while restart:
         directory_response = input("\nEnter a path to a directory with dita files : ")
         if directory_response:
             directory = Path(os.path.expanduser(directory_response))
-            if directory.exists(): # Must verify if folder is empty
+            if directory.exists() and not directory.is_file(): # Must verify if folder is empty
                 directory_missing = False
                 # print(directory.iterdir())
             else:
@@ -109,7 +109,7 @@ while restart:
                         gen_path_response = input("\nEnter the path where the file should be saved : ")
                         if gen_path_response:
                             gen_path = Path(os.path.expanduser(gen_path_response))
-                            if gen_path.exists():
+                            if gen_path.exists() and not gen_path.is_file():
                                 with open(gen_path/"yake_keywords.txt", 'w', encoding="utf-8") as file:
                                     for k in keywords:
                                         file.write("{0}\n".format(k[0]))
