@@ -33,12 +33,14 @@ while restart:
     # Expanduser will allow to interpret ~ in path as home dir
     directory_missing = True
     while directory_missing:
-        directory_response = input("\nEnter a path to a directory with dita files : ")
+        directory_response = input("\nEnter a path to a directory with at least one dita file : ")
         if directory_response:
             directory = Path(os.path.expanduser(directory_response))
-            if directory.exists() and not directory.is_file(): # Must verify if folder is empty
-                directory_missing = False
-                # print(directory.iterdir())
+            if directory.exists() and directory.is_dir():
+                if any(directory.rglob("*.dita")):
+                    directory_missing = False
+                else:
+                    print("\nThe given directory doesn't contain a dita file")
             else:
                 print("\nInvalid given path")
         else:
