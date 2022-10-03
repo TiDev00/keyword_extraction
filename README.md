@@ -39,3 +39,6 @@ Depending on which one you choose, you will have specific
 parameters to provide.<br>
 The program also allows you to generate a file with the
 list of extracted keywords from text corpus.
+
+## Author
+Thierno Ibrahima Cisse
