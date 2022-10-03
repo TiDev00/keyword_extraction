@@ -28,3 +28,14 @@ source venv/bin/activate
 ```
 
 ## Usage
+After the installation process, you can start the 
+program by running the following command :
+```
+python extractor.py
+```
+You have the choice between yake and bert for your
+extraction task. 
+Depending on which one you choose, you will have specific
+parameters to provide.<br>
+The program also allows you to generate a file with the
+list of extracted keywords from text corpus.
