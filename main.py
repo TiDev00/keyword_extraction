@@ -5,7 +5,6 @@ Created on Tue Sep 27 18:27:03 2022
 @author: Thierno Ibrahima CISSE
 """
 import os
-import glob
 import pandas as pd
 from pathlib import Path
 from utils import dita_processing, models
@@ -111,7 +110,7 @@ while restart:
                         gen_path_response = input("\nEnter the path where the file should be saved : ")
                         if gen_path_response:
                             gen_path = Path(os.path.expanduser(gen_path_response))
-                            if gen_path.exists() and not gen_path.is_file():
+                            if gen_path.exists() and gen_path.is_dir():
                                 with open(gen_path/"yake_keywords.txt", 'w', encoding="utf-8") as file:
                                     for k in keywords:
                                         file.write("{0}\n".format(k[0]))
@@ -133,7 +132,7 @@ while restart:
         # Getting number of topics for bert
         topic_missing = True
         while topic_missing:
-            topic_response = input("\nHow many topics do the dita files contain ? ")
+            topic_response = input("\nHow many categories the dita files will be divided into ? ")
             if topic_response and topic_response != '0':
                 try:
                     num_topics = int(topic_response)
@@ -165,7 +164,37 @@ while restart:
         print("\n")
         print("LIST OF KEYWORDS".center(width))
         keywords = models.bert_extractor(corpus_no_ngrams, num_keywords, num_topics)
-        pass
+        # Loop through the keywords list and display
+        for k in keywords:
+            print("\n\t{0}".format(k))
+        # File generation
+        file_gen_ques = True
+        while file_gen_ques:
+            file_gen_response = input("\nDo you want to generate a file with these keywords ?\n\n"
+                                      "YES (y) / NO (n) : ").lower()
+            if file_gen_response and file_gen_response in ['y', 'n']:
+                if file_gen_response == 'y':
+                    gen_path_ques = True
+                    while gen_path_ques:
+                        gen_path_response = input("\nEnter the path where the file should be saved : ")
+                        if gen_path_response:
+                            gen_path = Path(os.path.expanduser(gen_path_response))
+                            if gen_path.exists() and gen_path.is_dir():
+                                with open(gen_path / "yake_keywords.txt", 'w', encoding="utf-8") as file:
+                                    for k in keywords:
+                                        file.write("{0}\n".format(k))
+                                file.close()
+                                print("\nFile was generated to : {0}".format(gen_path / "yake_keywords.txt"))
+                                gen_path_ques = False
+                                file_gen_ques = False
+                            else:
+                                print("\nInvalid given path")
+                        else:
+                            print("\nInvalid given path")
+                else:
+                    file_gen_ques = False
+            else:
+                print("\nInvalid choice")
 
     # Extract again keywords or close program
     restart_answer = True
