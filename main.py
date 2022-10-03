@@ -180,11 +180,11 @@ while restart:
                         if gen_path_response:
                             gen_path = Path(os.path.expanduser(gen_path_response))
                             if gen_path.exists() and gen_path.is_dir():
-                                with open(gen_path / "bert_keywords.txt", 'w', encoding="utf-8") as file:
+                                with open(gen_path/"bert_keywords.txt", 'w', encoding="utf-8") as file:
                                     for k in keywords:
                                         file.write("{0}\n".format(k))
                                 file.close()
-                                print("\nFile was generated to : {0}".format(gen_path / "bert_keywords.txt"))
+                                print("\nFile was generated to : {0}".format(gen_path/"bert_keywords.txt"))
                                 gen_path_ques = False
                                 file_gen_ques = False
                             else:
