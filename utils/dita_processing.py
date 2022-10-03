@@ -28,7 +28,7 @@ def strip_dita_text(file):
 def strip_dita_in_directory(directory):
     """
         Use the strip_dita_text function in a for multiple files in a directory
-        and return the list of extracted text
+        and return the list of extracted text and total of files
         Parameters
         ----------
             directory : path
@@ -37,8 +37,12 @@ def strip_dita_in_directory(directory):
         -------
             list_text : list
                 List of text extracted from each file
+            num_files : int
+                Count of files
+
     """
     list_of_docs = []
+    count = 0
     for root, subdirectories, files in os.walk(directory):
         for file in files:
             if os.path.join(root, file).endswith('.dita'):
@@ -47,4 +51,5 @@ def strip_dita_in_directory(directory):
                     text = strip_dita_text(f)
                     f.close()
                 list_of_docs.append(text)
-    return list_of_docs
+                count += 1
+    return count, list_of_docs
