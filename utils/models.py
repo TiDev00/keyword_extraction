@@ -1,5 +1,5 @@
 """
-model
+models
 -----
 Functions for extracting keywords.
 Contents:
