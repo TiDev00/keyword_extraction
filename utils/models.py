@@ -57,7 +57,7 @@ def bert_extractor(text, top_keywords, ntopics):
             keywords_list : list
                 List of extracted keywords
     """
-    input_language = "english"
+
     if top_keywords is None:
         top_keywords = 10
     if ntopics is None:
@@ -65,7 +65,7 @@ def bert_extractor(text, top_keywords, ntopics):
     return extract_kws(
         method="BERT",
         text_corpus=text,
-        input_language=input_language,
+        input_language="english",
         num_keywords=top_keywords,
         num_topics=ntopics,
         prompt_remove_words=False,

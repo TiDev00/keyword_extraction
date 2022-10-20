@@ -13,8 +13,10 @@ with open('/usr/local/lib/python3.8/site-packages/kwx/utils.py', 'r', encoding='
     data = file.readlines()
 
 data[330] = "    texts_no_emojis = texts_no_punctuation\n"
-data[331] = ""
-data[332] = ""
+data[433] = "        nlp = None\n"
+data[331:333] = ""
+data[424:431] = ""
+data[704:746] = ""
 
 with open('/usr/local/lib/python3.8/site-packages/kwx/utils.py', 'w', encoding='utf-8') as file:
     file.writelines(data)
