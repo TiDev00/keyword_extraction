@@ -27,7 +27,7 @@ if __name__ == "__main__":
     print(header)
 
     restart = True
-    WORKDIR = "/home/app"
+    WORKDIR = "/media"
     while restart:
         # Wrap given path in Path object and verify if it exists on mac or windows.
         # Expanduser will allow to interpret ~ in path as home dir
@@ -107,24 +107,24 @@ if __name__ == "__main__":
                                           "YES (y) / NO (n) : ").lower()
                 if file_gen_response and file_gen_response in ['y', 'n']:
                     if file_gen_response == 'y':
-                        gen_path_ques = True
-                        while gen_path_ques:
-                            # gen_path_response = input("\nEnter the path where the file should be saved : ")
-                            gen_path_response = WORKDIR
-                            if gen_path_response:
-                                gen_path = Path(os.path.expanduser(gen_path_response))
-                                if gen_path.exists() and gen_path.is_dir():
-                                    with open(gen_path/"yake_keywords.txt", 'w', encoding="utf-8") as file:
-                                        for k in keywords:
-                                            file.write("{0}\n".format(k[0]))
-                                    file.close()
-                                    print("\nFile was generated to : {0}".format(gen_path/"yake_keywords.txt"))
-                                    gen_path_ques = False
-                                    file_gen_ques = False
-                            #     else:
-                            #         print("\nInvalid given path")
-                            # else:
-                            #     print("\nInvalid given path")
+                        # gen_path_ques = True
+                        # while gen_path_ques:
+                        # gen_path_response = input("\nEnter the path where the file should be saved : ")
+                        gen_path_response = WORKDIR + "/extractor_output"
+                        # if gen_path_response:
+                        gen_path = Path(os.path.expanduser(gen_path_response))
+                        # if gen_path.exists() and gen_path.is_dir():
+                        with open(gen_path/"yake_keywords.txt", 'w', encoding="utf-8") as file:
+                            for k in keywords:
+                                file.write("{0}\n".format(k[0]))
+                        file.close()
+                        print("\nFile was generated to : {0}".format(gen_path/"yake_keywords.txt"))
+                        # gen_path_ques = False
+                        file_gen_ques = False
+                        #     else:
+                        #         print("\nInvalid given path")
+                        # else:
+                        #     print("\nInvalid given path")
                     else:
                         file_gen_ques = False
                 else:
@@ -179,24 +179,24 @@ if __name__ == "__main__":
                                           "YES (y) / NO (n) : ").lower()
                 if file_gen_response and file_gen_response in ['y', 'n']:
                     if file_gen_response == 'y':
-                        gen_path_ques = True
-                        while gen_path_ques:
-                            # gen_path_response = input("\nEnter the path where the file should be saved : ")
-                            gen_path_response = WORKDIR
-                            if gen_path_response:
-                                gen_path = Path(os.path.expanduser(gen_path_response))
-                                if gen_path.exists() and gen_path.is_dir():
-                                    with open(gen_path/"bert_keywords.txt", 'w', encoding="utf-8") as file:
-                                        for k in keywords:
-                                            file.write("{0}\n".format(k))
-                                    file.close()
-                                    print("\nFile was generated to : {0}".format(gen_path/"bert_keywords.txt"))
-                                    gen_path_ques = False
-                                    file_gen_ques = False
-                            #     else:
-                            #         print("\nInvalid given path")
-                            # else:
-                            #     print("\nInvalid given path")
+                        # gen_path_ques = True
+                        # while gen_path_ques:
+                        # gen_path_response = input("\nEnter the path where the file should be saved : ")
+                        gen_path_response = WORKDIR + "/extractor_output"
+                        # if gen_path_response:
+                        gen_path = Path(os.path.expanduser(gen_path_response))
+                        # if gen_path.exists() and gen_path.is_dir():
+                        with open(gen_path/"bert_keywords.txt", 'w', encoding="utf-8") as file:
+                            for k in keywords:
+                                file.write("{0}\n".format(k))
+                        file.close()
+                        print("\nFile was generated to : {0}".format(gen_path/"bert_keywords.txt"))
+                        # gen_path_ques = False
+                        file_gen_ques = False
+                        #     else:
+                        #         print("\nInvalid given path")
+                        # else:
+                        #     print("\nInvalid given path")
                     else:
                         file_gen_ques = False
                 else:
