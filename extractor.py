@@ -35,13 +35,13 @@ if __name__ == "__main__":
         while directory_missing:
             # directory_response = input("\nEnter a path to a directory with at least one dita file : ")
             directory_response = WORKDIR
-            if directory_response:
-                directory = Path(os.path.expanduser(directory_response))
-                if directory.exists() and directory.is_dir():
-                    if any(directory.rglob("*.dita")):
-                        directory_missing = False
-                    else:
-                        print("\nThe working directory doesn't contain a dita file")
+            # if directory_response:
+            directory = Path(os.path.expanduser(directory_response))
+            # if directory.exists() and directory.is_dir():
+            if any(directory.rglob("*.dita")):
+                directory_missing = False
+            else:
+                print("\nThe working directory doesn't contain a dita file")
             #     else:
             #         print("\nInvalid given path")
             # else:
@@ -113,6 +113,8 @@ if __name__ == "__main__":
                         gen_path_response = WORKDIR + "/extractor_output"
                         # if gen_path_response:
                         gen_path = Path(os.path.expanduser(gen_path_response))
+                        if not gen_path.exists():
+                            gen_path.mkdir()
                         # if gen_path.exists() and gen_path.is_dir():
                         with open(gen_path/"yake_keywords.txt", 'w', encoding="utf-8") as file:
                             for k in keywords:
@@ -185,6 +187,8 @@ if __name__ == "__main__":
                         gen_path_response = WORKDIR + "/extractor_output"
                         # if gen_path_response:
                         gen_path = Path(os.path.expanduser(gen_path_response))
+                        if not gen_path.exists():
+                            gen_path.mkdir()
                         # if gen_path.exists() and gen_path.is_dir():
                         with open(gen_path/"bert_keywords.txt", 'w', encoding="utf-8") as file:
                             for k in keywords:
