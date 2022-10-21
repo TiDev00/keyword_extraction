@@ -9,7 +9,8 @@ Contents:
     replace lines in file
 """
 
-with open('/usr/local/lib/python3.8/site-packages/kwx/utils.py', 'r', encoding='utf-8') as file:
+# Run the file just once
+with open('/venv/lib/site-packages/kwx/utils.py', 'r', encoding='utf-8') as file:
     data = file.readlines()
 
 data[330] = "    texts_no_emojis = texts_no_punctuation\n"
@@ -18,13 +19,13 @@ data[331:333] = ""
 data[424:431] = ""
 data[704:746] = ""
 
-with open('/usr/local/lib/python3.8/site-packages/kwx/utils.py', 'w', encoding='utf-8') as file:
+with open('/venv/lib/site-packages/kwx/utils.py', 'w', encoding='utf-8') as file:
     file.writelines(data)
 
-with open('/usr/local/lib/python3.8/site-packages/past/builtins/misc.py', 'r', encoding='utf-8') as file:
+with open('/venv/lib/site-packages/past/builtins/misc.py', 'r', encoding='utf-8') as file:
     data = file.readlines()
 
 data[44] = "    from importlib import reload\n"
 
-with open('/usr/local/lib/python3.8/site-packages/past/builtins/misc.py', 'w', encoding='utf-8') as file:
+with open('/venv/lib/site-packages/past/builtins/misc.py', 'w', encoding='utf-8') as file:
     file.writelines(data)

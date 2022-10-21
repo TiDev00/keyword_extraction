@@ -7,24 +7,11 @@ Keyword Extraction using Text Features. Yake and kwx are
 used for the extracting model.
 
 ## Installation
-All the needed packages are already installed in the 
-venv directory. You have to activate the virtual 
-environment before running the script.
-
-### Windows machine
-* Open the Windows Command Prompt at the 
-keyword_extraction directory
-* Execute the following command : <br>
+The list of needed packages with there specific version is 
+in the requirements.txt file. Run the following command to 
+install them.
 ```
-venv\Scripts\activate.bat
-```
-
-### Mac / Linux machine
-* Open the terminal at the keyword_extraction directory
-* Go to the keyword_extraction directory
-* Execute the following command : <br>
-```
-source venv/bin/activate
+pip install --no-cache-dir -r requirements.txt
 ```
 
 ## Usage
