@@ -27,23 +27,25 @@ if __name__ == "__main__":
     print(header)
 
     restart = True
+    WORKDIR = "/home/app"
     while restart:
         # Wrap given path in Path object and verify if it exists on mac or windows.
         # Expanduser will allow to interpret ~ in path as home dir
         directory_missing = True
         while directory_missing:
-            directory_response = input("\nEnter a path to a directory with at least one dita file : ")
+            # directory_response = input("\nEnter a path to a directory with at least one dita file : ")
+            directory_response = WORKDIR
             if directory_response:
                 directory = Path(os.path.expanduser(directory_response))
                 if directory.exists() and directory.is_dir():
                     if any(directory.rglob("*.dita")):
                         directory_missing = False
                     else:
-                        print("\nThe given directory doesn't contain a dita file")
-                else:
-                    print("\nInvalid given path")
-            else:
-                print("\nYou didn't give a path")
+                        print("\nThe working directory doesn't contain a dita file")
+            #     else:
+            #         print("\nInvalid given path")
+            # else:
+            #     print("\nYou didn't give a path")
 
         # Number of keywords wanted
         keywords_missing = True
@@ -107,7 +109,8 @@ if __name__ == "__main__":
                     if file_gen_response == 'y':
                         gen_path_ques = True
                         while gen_path_ques:
-                            gen_path_response = input("\nEnter the path where the file should be saved : ")
+                            # gen_path_response = input("\nEnter the path where the file should be saved : ")
+                            gen_path_response = WORKDIR
                             if gen_path_response:
                                 gen_path = Path(os.path.expanduser(gen_path_response))
                                 if gen_path.exists() and gen_path.is_dir():
@@ -118,10 +121,10 @@ if __name__ == "__main__":
                                     print("\nFile was generated to : {0}".format(gen_path/"yake_keywords.txt"))
                                     gen_path_ques = False
                                     file_gen_ques = False
-                                else:
-                                    print("\nInvalid given path")
-                            else:
-                                print("\nInvalid given path")
+                            #     else:
+                            #         print("\nInvalid given path")
+                            # else:
+                            #     print("\nInvalid given path")
                     else:
                         file_gen_ques = False
                 else:
@@ -178,7 +181,8 @@ if __name__ == "__main__":
                     if file_gen_response == 'y':
                         gen_path_ques = True
                         while gen_path_ques:
-                            gen_path_response = input("\nEnter the path where the file should be saved : ")
+                            # gen_path_response = input("\nEnter the path where the file should be saved : ")
+                            gen_path_response = WORKDIR
                             if gen_path_response:
                                 gen_path = Path(os.path.expanduser(gen_path_response))
                                 if gen_path.exists() and gen_path.is_dir():
@@ -189,10 +193,10 @@ if __name__ == "__main__":
                                     print("\nFile was generated to : {0}".format(gen_path/"bert_keywords.txt"))
                                     gen_path_ques = False
                                     file_gen_ques = False
-                                else:
-                                    print("\nInvalid given path")
-                            else:
-                                print("\nInvalid given path")
+                            #     else:
+                            #         print("\nInvalid given path")
+                            # else:
+                            #     print("\nInvalid given path")
                     else:
                         file_gen_ques = False
                 else:

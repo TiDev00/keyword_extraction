@@ -1,6 +1,6 @@
 FROM python:3.8.9
 
-WORKDIR /home/software
+WORKDIR /home/app
 
 COPY utils ./utils
 COPY extractor.py .
