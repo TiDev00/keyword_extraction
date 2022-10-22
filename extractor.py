@@ -27,7 +27,7 @@ if __name__ == "__main__":
     print(header)
 
     restart = True
-    WORKDIR = "/media"
+    WORKDIR = "/mnt"
     while restart:
         # Wrap given path in Path object and verify if it exists on mac or windows.
         # Expanduser will allow to interpret ~ in path as home dir
