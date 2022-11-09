@@ -11,7 +11,7 @@ The list of needed packages with there specific version is
 in the requirements.txt file. Run the following command to 
 install them.
 ```
-pip install --no-cache-dir -r requirements.txt
+pip install --no-cache-dir -r utils/requirements.txt
 ```
 
 ## Usage
