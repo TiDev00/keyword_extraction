@@ -10,7 +10,7 @@ used for the extracting model.
 Simply download the image locally by running on your 
 terminal :
 ```
-docker pull tcisse507/keyword_extractor
+docker pull <link/to/keyword_extractor/image>
 ```
 
 You can list all the available images on your pc with the command :
